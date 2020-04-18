@@ -9,6 +9,8 @@ import { SiteRoutingModule } from './modules/site/site-routing.module';
 import { CoreModule } from './core/core.module';
 import { SiteModule } from './modules/site/site.module';
 import { SharedModule } from './shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialAngularModule } from './modules/angular-material/angular-material.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { SharedModule } from './shared/shared.module';
     CoreModule,
     SiteModule,
     SharedModule,
+    BrowserAnimationsModule,
+    MaterialAngularModule
   ],
   providers: [
     {

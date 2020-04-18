@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { EstadosComponent } from './estados/estados.component';
+import { HomeComponent } from './pages/home/home.component';
+import { EstadosComponent } from './pages/estados/estados.component';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiPrefix } from 'src/app/core/interceptors/api-prefix.interceptor';
-import { MunicipiosComponent } from './municipios/municipios.component';
+import { MunicipiosComponent } from './pages/municipios/municipios.component';
 
 
 const routes: Routes = [

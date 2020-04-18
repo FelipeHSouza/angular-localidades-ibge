@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SiteRoutingModule } from './site-routing.module';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiPrefix } from 'src/app/core/interceptors/api-prefix.interceptor';
-import { EstadosComponent } from './estados/estados.component';
+import { EstadosComponent } from './pages/estados/estados.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { MunicipiosComponent } from './municipios/municipios.component';
+import { MunicipiosComponent } from './pages/municipios/municipios.component';
+import { MaterialAngularModule } from '../angular-material/angular-material.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MunicipiosComponent } from './municipios/municipios.component';
     BrowserModule,
     RouterModule,
     CommonModule,
-    SiteRoutingModule
+    SiteRoutingModule,
+    MaterialAngularModule
   ],
   exports:[
   ],
