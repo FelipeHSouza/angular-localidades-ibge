@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IbgeService } from 'src/app/core/services/ibge.service';
-import { Estados } from 'src/app/core/models/estados.model';
 import { ToolbarInfo } from 'src/app/core/models/toolbar-info.model';
+import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
+import { ObterEstadosResult } from 'src/app/core/models/result/obter-estados-result.model';
 
 @Component({
   selector: 'app-estados',
@@ -9,8 +10,7 @@ import { ToolbarInfo } from 'src/app/core/models/toolbar-info.model';
   styleUrls: ['./estados.component.scss']
 })
 export class EstadosComponent implements OnInit {
-  estados: Estados[]
-
+  estados: ObterEstadosResult[]
   toolbarInfo: ToolbarInfo = {
     title: 'Estados',
     urlApi: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
@@ -24,9 +24,10 @@ export class EstadosComponent implements OnInit {
     this.obterEstados()
   }
 
-  obterEstados(){
+  obterEstados() {
     this._ibgeService.obterEstados().subscribe(
       res => {
+        this.estados = res
         console.log(res)
       }
     )

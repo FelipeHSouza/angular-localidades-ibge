@@ -1,1 +1,25 @@
 <app-toolbar-title [toolbarInfo]="toolbarInfo"></app-toolbar-title>
+
+<div class="container wrapper">
+    <div class="row">
+        <ng-container *ngFor="let item of estados">
+            <div class="col-md-4 col-sm-6 estados-content">
+                <mat-card class="example-card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="estado-img"
+                            [ngStyle]="{'background-image': 'url(../../../../../assets/img/bandeiras/' + item.sigla + '.jpg)'}">
+                        </div>
+                        <mat-card-title>{{item.sigla}} - {{item.nome}}</mat-card-title>
+                        <mat-card-subtitle>#{{item.id}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <span class="material-icons">explore</span> {{item.regiao.nome}}
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button>VER MUNICÍPIOS</button>
+                      </mat-card-actions>
+                </mat-card>
+            </div>
+        </ng-container>
+    </div>
+</div>
