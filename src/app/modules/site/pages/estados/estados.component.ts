@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IbgeService } from 'src/app/core/services/ibge.service';
 import { ToolbarInfo } from 'src/app/core/models/toolbar-info.model';
-import { groupBy, mergeMap, toArray } from 'rxjs/internal/operators';
 import { ObterEstadosResult } from 'src/app/core/models/result/obter-estados-result.model';
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-estados',
@@ -25,7 +25,9 @@ export class EstadosComponent implements OnInit {
   }
 
   obterEstados() {
-    this._ibgeService.obterEstados().subscribe(
+    this._ibgeService.obterEstados().pipe(
+      map( res => res.sort((a, b) => (a.sigla > b.sigla) ? 1 : -1))
+    ).subscribe(
       res => {
         this.estados = res
         console.log(res)
