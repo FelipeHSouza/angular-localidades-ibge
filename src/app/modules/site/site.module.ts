@@ -10,13 +10,15 @@ import { EstadosComponent } from './pages/estados/estados.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { MunicipiosComponent } from './pages/municipios/municipios.component';
 import { MaterialAngularModule } from '../angular-material/angular-material.module';
+import { ToolbarTitleComponent } from './components/toolbar-title/toolbar-title.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     EstadosComponent,
-    MunicipiosComponent
+    MunicipiosComponent,
+    ToolbarTitleComponent
   ],
   imports: [
     BrowserModule,
