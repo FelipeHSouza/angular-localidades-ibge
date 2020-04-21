@@ -1,8 +1,4 @@
-export interface Regiao {
-    id: number;
-    sigla: string;
-    nome: string;
-}
+import { Regiao } from '../ibge/regiao.model';
 
 export class ObterEstadosResult {
     id: number;

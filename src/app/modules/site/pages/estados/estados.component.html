@@ -16,7 +16,7 @@
                         <span class="material-icons">explore</span> {{item.regiao.nome}}
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-button>VER MUNICÍPIOS</button>
+                        <button mat-button [routerLink]="['/municipios',item.id]">VER MUNICÍPIOS</button>
                       </mat-card-actions>
                 </mat-card>
             </div>

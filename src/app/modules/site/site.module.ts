@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MunicipiosComponent } from './pages/municipios/municipios.component';
 import { MaterialAngularModule } from '../angular-material/angular-material.module';
 import { ToolbarTitleComponent } from './components/toolbar-title/toolbar-title.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ToolbarTitleComponent } from './components/toolbar-title/toolbar-title.
     HomeComponent,
     EstadosComponent,
     MunicipiosComponent,
-    ToolbarTitleComponent
+    ToolbarTitleComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

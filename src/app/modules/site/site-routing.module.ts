@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'estados', component: EstadosComponent },
-  { path: 'municipios', component: MunicipiosComponent }
+  { path: 'municipios', component: MunicipiosComponent },
+  { path: 'municipios/:id', component: MunicipiosComponent }
 ];
 
 @NgModule({
