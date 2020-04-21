@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { IbgeService } from 'src/app/core/services/ibge.service';
 import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -6,8 +6,8 @@ import { Municipio } from 'src/app/core/models/ibge/municipio.model';
 import { ToolbarInfo } from 'src/app/core/models/toolbar-info.model';
 import { MunicipioItem } from 'src/app/core/models/municipio-item.model';
 import { map } from 'rxjs/operators';
-import { ThemePalette } from '@angular/material/core';
-import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-municipios',
@@ -22,6 +22,7 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
   ]
 })
 export class MunicipiosComponent implements OnInit {
+  dataSource: any
   isLoading: boolean = true
   municipios: Municipio[]
   id: string
@@ -29,16 +30,15 @@ export class MunicipiosComponent implements OnInit {
     title: 'Municipios',
     urlApi: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/{UF}/municipios'
   }
-
-  dataSource = []
-  columnsToDisplay = ['id', 'municipio', 'microrregiao', 'mesorregiao'];
-  expandedElement: MunicipioItem | null;
+  columns = ['id', 'municipio', 'microrregiao', 'mesorregiao'];
 
   constructor(
     private route: ActivatedRoute,
     private _ibgeService: IbgeService
   ) { }
 
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
 
@@ -65,7 +65,8 @@ export class MunicipiosComponent implements OnInit {
     ).subscribe(
       res => {
         this.isLoading = false
-        this.dataSource = res
+        this.dataSource = new MatTableDataSource<MunicipioItem>(res);
+        this.dataSource.paginator = this.paginator;
       }
     )
   }
