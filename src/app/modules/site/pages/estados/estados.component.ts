@@ -3,6 +3,7 @@ import { IbgeService } from 'src/app/core/services/ibge.service';
 import { ToolbarInfo } from 'src/app/core/models/toolbar-info.model';
 import { ObterEstadosResult } from 'src/app/core/models/result/obter-estados-result.model';
 import { map } from 'rxjs/operators'
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-estados',
@@ -17,10 +18,12 @@ export class EstadosComponent implements OnInit {
   }
 
   constructor(
-    private _ibgeService: IbgeService
+    private _ibgeService: IbgeService,
+    private titleService: Title
   ) { }
 
   ngOnInit(): void {
+    this.setTitle()
     this.obterEstados()
   }
 
@@ -33,5 +36,9 @@ export class EstadosComponent implements OnInit {
         console.log(res)
       }
     )
+  }
+
+  setTitle() {
+    this.titleService.setTitle('Localidades IBGE - ' + this.toolbarInfo.title);
   }
 }

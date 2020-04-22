@@ -36,3 +36,24 @@ tr.example-element-row:not(.example-expanded-row):active {
 .example-element-description-attribution {
     opacity: 0.5;
 }
+
+.sticky{
+    bottom: 0px;
+  position: sticky;
+  z-index: 10;
+}
+
+.flag{
+    max-width: 75px;
+}
+
+.mat-form-field{
+    width: 400px!important
+}
+
+.btn-estados{
+    margin-top: 15px;
+    float: right;
+    color: white;
+    background-color: #007bff;
+}

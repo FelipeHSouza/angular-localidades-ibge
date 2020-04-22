@@ -1,33 +1,52 @@
 <app-toolbar-title [toolbarInfo]="toolbarInfo"></app-toolbar-title>
 <app-loading *ngIf="isLoading"></app-loading>
-<div class="container wrapper">
-    <div class="mat-elevation-z8"> 
-        <table mat-table [dataSource]="dataSource">
-    
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> # </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-          </ng-container>
-      
-          <ng-container matColumnDef="municipio">
-            <th mat-header-cell *matHeaderCellDef> Município </th>
-            <td mat-cell *matCellDef="let element"> {{element.municipio}} </td>
-          </ng-container>
-      
-          <ng-container matColumnDef="microrregiao">
-            <th mat-header-cell *matHeaderCellDef> Microrregiao </th>
-            <td mat-cell *matCellDef="let element"> {{element.microrregiao}} </td>
-          </ng-container>
 
-          <ng-container matColumnDef="mesorregiao">
-            <th mat-header-cell *matHeaderCellDef> Mesorregiao </th>
-            <td mat-cell *matCellDef="let element"> {{element.mesorregiao}} </td>
-          </ng-container>
-      
-          <tr mat-header-row *matHeaderRowDef="columns"></tr>
-          <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+<div class="container" id="box-tools">
+    <div class="row">
+        <div class="col-4">
+            <img [src]="flagImgSrc" class="flag">
+            <span class="ml-10">{{dscEstado}}</span>
+        </div>
+        <div class="col-6">
+            <mat-form-field class="search-estado mt-10">
+                <mat-icon matPrefix>search</mat-icon>
+              <mat-label>&nbsp; Pesquisar</mat-label>
+              <input (keyup)="filtrar($event)" matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-2">
+            <button mat-raised-button class="btn-estados">Ver Estados</button>
+        </div>
+    </div>
+</div>
+<div class="container wrapper">
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> # </th>
+                <td mat-cell *matCellDef="let municipio"> {{municipio.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="municipio">
+                <th mat-header-cell *matHeaderCellDef> Município </th>
+                <td mat-cell *matCellDef="let municipio"> {{municipio.municipio}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="microrregiao">
+                <th mat-header-cell *matHeaderCellDef> Microrregiao </th>
+                <td mat-cell *matCellDef="let municipio"> {{municipio.microrregiao}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="mesorregiao">
+                <th mat-header-cell *matHeaderCellDef> Mesorregiao </th>
+                <td mat-cell *matCellDef="let municipio"> {{municipio.mesorregiao}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns;"></tr>
         </table>
-      
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20, 100]" showFirstLastButtons class="sticky"></mat-paginator>
+    </div>
 </div>

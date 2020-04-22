@@ -1,6 +1,7 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "src/assets/scss/_mycss.scss";
+@import '~material-design-icons/iconfont/material-icons.css';
 
 a {
     cursor: pointer;
@@ -13,6 +14,9 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-.wrapper{
+.wrapper {
     padding: 20px;
+}
+#box-tools{
+    padding-top: 10px;
 }

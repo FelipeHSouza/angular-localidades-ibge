@@ -8,6 +8,7 @@ import { MunicipioItem } from 'src/app/core/models/municipio-item.model';
 import { map } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-municipios',
@@ -22,10 +23,12 @@ import { MatTableDataSource } from '@angular/material/table';
   ]
 })
 export class MunicipiosComponent implements OnInit {
+  flagImgSrc: string
+  dscEstado: string
+  paramId: string
   dataSource: any
   isLoading: boolean = true
   municipios: Municipio[]
-  id: string
   toolbarInfo: ToolbarInfo = {
     title: 'Municipios',
     urlApi: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/{UF}/municipios'
@@ -34,18 +37,22 @@ export class MunicipiosComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private _ibgeService: IbgeService
+    private _ibgeService: IbgeService,
+    private titleService: Title
   ) { }
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  
-  ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-    if (this.id == null)
+  ngOnInit(): void {
+    this.setTitle()
+
+    this.paramId = this.route.snapshot.paramMap.get('id');
+
+    this.getFlagImage(parseInt(this.paramId))
+    if (this.paramId == null)
       this.obterTodosMunicipios()
     else
-      this.obterMunicipiosPorUf(parseInt(this.id))
+      this.obterMunicipiosPorUf(parseInt(this.paramId))
   }
 
   obterMunicipiosPorUf(id: number) {
@@ -75,6 +82,26 @@ export class MunicipiosComponent implements OnInit {
     this._ibgeService.obterTodosMunicipios().subscribe(
       res => {
         this.municipios = res
+      }
+    )
+  }
+
+  setTitle() {
+    this.titleService.setTitle('Localidades IBGE - ' + this.toolbarInfo.title);
+  }
+
+  filtrar(event: Event) {
+    console.log(this.dataSource)
+    const filterValue = (event.target as HTMLInputElement).value
+    this.dataSource.filter = filterValue.trim().toLowerCase()
+  }
+
+  getFlagImage(id: number){
+    this._ibgeService.obterUfPorId(id).subscribe(
+      res => {
+        this.flagImgSrc = `/assets/img/bandeiras/${res.sigla}.jpg`
+        this.dscEstado = `${res.sigla} - ${res.nome}`
+        console.log(this.flagImgSrc)
       }
     )
   }

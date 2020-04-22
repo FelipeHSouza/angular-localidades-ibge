@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, ObservableLike } from 'rxjs';
 import { ObterEstadosResult } from '../models/result/obter-estados-result.model';
 import { ObterMunicipiosPorUfResult } from '../models/result/obter-municipios-por-uf-result.model';
 
@@ -19,6 +19,12 @@ export class IbgeService {
       `${environment.apiIbgeLocalidadesUrl}/estados`
     )
   };
+
+  obterUfPorId(id: number): Observable<ObterEstadosResult>{
+    return this.http.get<ObterEstadosResult>(
+      `${environment.apiIbgeLocalidadesUrl}/estados/${id}`
+    )
+  }
 
   obterMunicipiosPorUf(id: number): Observable<ObterMunicipiosPorUfResult[]>{
     return this.http.get<ObterMunicipiosPorUfResult[]>(
