@@ -28,14 +28,18 @@ export class EstadosComponent implements OnInit {
   }
 
   obterEstados() {
-    this._ibgeService.obterEstados().pipe(
-      map( res => res.sort((a, b) => (a.sigla > b.sigla) ? 1 : -1))
-    ).subscribe(
-      res => {
-        this.estados = res
-        console.log(res)
-      }
-    )
+    this.estados = JSON.parse(localStorage.getItem('estados'))
+
+    if (this.estados == null) {
+      this._ibgeService.obterEstados().pipe(
+        map(res => res.sort((a, b) => (a.sigla > b.sigla) ? 1 : -1))
+      ).subscribe(
+        res => {
+          localStorage.setItem('estados', JSON.stringify(res))
+          this.estados = res
+        }
+      )
+    }
   }
 
   setTitle() {

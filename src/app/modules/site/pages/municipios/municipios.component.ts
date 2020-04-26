@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Title } from '@angular/platform-browser';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-municipios',
@@ -38,7 +39,8 @@ export class MunicipiosComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private _ibgeService: IbgeService,
-    private titleService: Title
+    private titleService: Title,
+    public dialog: MatDialog
   ) { }
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -91,17 +93,15 @@ export class MunicipiosComponent implements OnInit {
   }
 
   filtrar(event: Event) {
-    console.log(this.dataSource)
     const filterValue = (event.target as HTMLInputElement).value
     this.dataSource.filter = filterValue.trim().toLowerCase()
   }
 
-  getFlagImage(id: number){
+  getFlagImage(id: number) {
     this._ibgeService.obterUfPorId(id).subscribe(
       res => {
         this.flagImgSrc = `/assets/img/bandeiras/${res.sigla}.jpg`
         this.dscEstado = `${res.sigla} - ${res.nome}`
-        console.log(this.flagImgSrc)
       }
     )
   }
